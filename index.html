@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<!--
+STEP 72 - Date Timezone Fix (Feb 3, 2026)
+Fixed: Dates showing one day off in book tiles (12/25 displayed as Dec 24)
+Issue: Second formatDate() function didn't add T00:00:00, treated dates as UTC
+Solution: Merged duplicate formatDate() functions, now always uses local timezone
+-->
 <html>
 <head>
     <meta charset="UTF-8">
@@ -1233,6 +1239,11 @@
         
         function formatDate(dateStr) {
             if (!dateStr) return '';
+            // If it's just a year (4 digits), return it as-is
+            if (dateStr.length === 4 && !dateStr.includes('-')) {
+                return dateStr;
+            }
+            // Parse date as local timezone by adding T00:00:00
             const date = new Date(dateStr + 'T00:00:00');
             const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
             return months[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear();
@@ -1811,16 +1822,6 @@
             displayBooks();
         }
         
-        function formatDate(dateStr) {
-            if (!dateStr) return '';
-            // If it's just a year (4 digits), return it as-is
-            if (dateStr.length === 4 && !dateStr.includes('-')) {
-                return dateStr;
-            }
-            // Otherwise format as normal date
-            const date = new Date(dateStr);
-            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-        }
         
         function toggleYearOnly(modal) {
             const checkbox = document.getElementById(modal + '-year-only');
