@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <!--
-STEP 72 - Date Timezone Fix (Feb 3, 2026)
-Fixed: Dates showing one day off in book tiles (12/25 displayed as Dec 24)
-Issue: Second formatDate() function didn't add T00:00:00, treated dates as UTC
-Solution: Merged duplicate formatDate() functions, now always uses local timezone
+STEP 73 - Web App Icon (Feb 3, 2026)
+Added: Custom app icon for home screen (colorful bookshelf design)
+Added: Manifest and icon links in HTML head
+Icon: 7 books on wooden shelf with warm beige background
+To use: Save icon from icon-generator.html as app-icon.png and upload to GitHub
 -->
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>📚 My Book Library</title>
+    
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="book-icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="book-icon-512.png">
+    <link rel="apple-touch-icon" href="book-icon-192.png">
+    <meta name="theme-color" content="#66cccc">
     
     <!-- Firebase SDK -->
     <script type="module">
